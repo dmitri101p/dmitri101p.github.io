@@ -1,0 +1,14 @@
+
+
+@media only screen and (min-width: 321px) {
+.main{
+    display: flex;
+
+}
+.all{
+    margin: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+}
