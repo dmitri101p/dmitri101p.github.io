@@ -6,13 +6,15 @@ var x = canvas.width/2;
 var y = canvas.height/2;
 //Скорость движения шара
 var dx = 0.2;
-var dy = 0.3;
+var dy = 0.2;
 
 var dxFactor = 1;
 var dyFactor = 1;
 //Шар
 var ballRadius = 10;
 var radius = ballRadius/2 + (ballRadius/7.5);
+
+var edit = true;
 
 //Ракетка
 var paddleHeight = 10;
@@ -139,15 +141,19 @@ function drawBall() {
 
 document.getElementById('buy').onclick = function() {
     if (score < price) {
-        alert("Недостаточно средств, накопите ещё");
+        alert("Недостаточно средств");
     }
 
     else {
-        score -= price;
-        price *= 2;
-        dx *= 1.3;
-        dy *= 1.3;
-
+        if (edit == false) {
+            alert ("Скорость слишком высока, купите другое улучшение");
+        }
+        else{
+            score -= price;
+            price *= 2;
+            dx *= 1.3;
+            dy *= 1.3;
+        }
     }
   }
 
@@ -231,9 +237,11 @@ document.getElementById('cmd').onclick = function() {
 
 
 function draw() {
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
+    if (dx>=12){
+        edit = false;
+    }
     wallsColission();  
     x += dx;
     y += dy;
