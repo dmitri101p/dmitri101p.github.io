@@ -30,6 +30,7 @@ document.addEventListener("keyup", keyUpHandler, false);
 
 var score = 0;
 var price = 1;
+var colorPrice = 120;
 
 var login = "dev";
 var password = "6";
@@ -59,6 +60,9 @@ if (dx == 0 || dx == null){
     dx = 0.2;
 }
 
+
+var colorID = 0;
+
 // else {
 //     dx = 1.3;
 // }
@@ -85,7 +89,35 @@ if (dy == 0 || dy == null) {
 //     dyFactor = 1.3;
 // }
 
-
+function colorIDCheck() {
+    if (colorID == 0) {
+        ctx.fillStyle = "#0095DD";
+    }
+    if (colorID == 1) {
+        ctx.fillStyle = "#FF3900"; // Оранжевый
+    }
+    if (colorID == 2) {
+        ctx.fillStyle = "#BE008A"; // Pink
+    }
+    if (colorID == 3) {
+        ctx.fillStyle = "#530FAD"; // Фиолетовый
+    }
+    if (colorID == 4) {
+        ctx.fillStyle = "#00AC6B"; // izumrud
+    }
+    if (colorID == 5) {
+        ctx.fillStyle = "#67E300"; // salat
+    }
+    if (colorID == 6) {
+        ctx.fillStyle = "#2618B1"; // dark blude
+    }
+    if (colorID == 7) {
+        ctx.fillStyle = "#FEE600"; // yellow
+    }
+    if (colorID == 8) {
+        ctx.fillStyle = "#009F89"; // Бесплатный цвет
+    }
+}
 
 function keyDownHandler(e) {
     if(e.keyCode == 39) {
@@ -131,7 +163,7 @@ function wallsColission() {
 function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "#0095DD";
+    colorIDCheck();
     ctx.fill();
     ctx.closePath();
 }
@@ -160,6 +192,24 @@ document.getElementById('buy').onclick = function() {
 document.getElementById('check').onclick = function() {
     alert ("В данный момент цена улучшения составляет: " + price + "$") 
 }
+
+document.getElementById('buyColor').onclick = function() {
+    var colorCheck = 0;
+    colorCheck = prompt ("Введите ID цвета", "");
+    if (score >= colorPrice) {
+        colorID = colorCheck;
+        score -= colorPrice;
+    }
+    else {
+        if (colorCheck == 8) {
+            colorID = colorCheck;
+        }
+        else{
+            alert("Для покупки недостаточно средств");
+        }
+    }
+}
+
 
 document.getElementById('delete').onclick = function() {
     localStorage.clear();
